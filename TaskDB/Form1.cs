@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System;
+using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace TaskDB
 {
@@ -16,5 +19,23 @@ namespace TaskDB
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection conexion = DatabaseConnection.GetConnection())
+                {
+                    conexion.Open();
+                    MessageBox.Show("Conexión exitosa con TaskDB");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
     }
+
+
 }
